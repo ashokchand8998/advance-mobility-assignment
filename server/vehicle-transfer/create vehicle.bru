@@ -1,0 +1,23 @@
+meta {
+  name: create vehicle
+  type: http
+  seq: 3
+}
+
+post {
+  url: http://localhost:3001/vehicle
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "vehicleNumber": "MH23434",
+    "currentOwnerId": "1",
+    "currentOwnerName": "ACT",
+    "currentOwnerType": "Driver",
+    "vehicleType": "Car",
+    "pucCert": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.shutterstock.com%2Fsearch%2Fpuc&psig=AOvVaw3f-_5c8fY8S4yI5moplErA&ust=1724877035620000&source=images&cd=vfe&opi=89978449&ved=0CBEQjRxqFwoTCICxiu2BlogDFQAAAAAdAAAAABAE",
+    "insuranceCert": "https://www.shutterstock.com/image-photo/contract-certificate-health-insurance-abusive-260nw-1687790569.jpg"
+  }
+}

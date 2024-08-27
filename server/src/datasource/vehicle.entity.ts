@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany, CreateDateColumn } from "typeorm";
+import { Transfer } from "./transfer.entity";
 
 @Entity()
 export class Vehicle {
@@ -17,4 +18,20 @@ export class Vehicle {
 
     @Column()
     insuranceCert: string;
+
+    @Column({nullable: true})
+    currentOwnerId: number;
+
+    @Column({nullable: true})
+    currentOwnerName: string;
+
+    @Column({nullable: true})
+    currentOwnerType: string;
+
+    @Column()
+    @CreateDateColumn()
+    date: Date;
+
+    @OneToMany(() => Transfer, (transfer) => transfer.vehicle)
+    transfers: Transfer[];
 }

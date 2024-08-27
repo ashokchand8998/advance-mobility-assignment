@@ -1,0 +1,18 @@
+meta {
+  name: create driver
+  type: http
+  seq: 4
+}
+
+post {
+  url: http://localhost:3001/drivers
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "name": "Test",
+    "phone": "1234567890"
+  }
+}

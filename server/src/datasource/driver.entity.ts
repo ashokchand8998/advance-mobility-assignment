@@ -1,4 +1,4 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn } from "typeorm";
 
 @Entity()
 export class Driver {
@@ -14,4 +14,8 @@ export class Driver {
 
     @Column({nullable: true})
     profilePic: string;
+
+    @Column()
+    @CreateDateColumn()
+    date: Date;
 }

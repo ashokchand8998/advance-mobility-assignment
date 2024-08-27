@@ -1,0 +1,19 @@
+meta {
+  name: perform transfer
+  type: http
+  seq: 7
+}
+
+post {
+  url: http://localhost:3001/vehicles/:vehicleId/transfer
+  body: json
+  auth: none
+}
+
+params:path {
+  vehicleId: 2
+}
+
+body:json {
+  { "newOwnerType": "driver", "newOwnerId": "2", "newOwnerName": "Test" }
+}
