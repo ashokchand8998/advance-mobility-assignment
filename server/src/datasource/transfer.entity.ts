@@ -11,23 +11,23 @@ export class Transfer {
 
     @ManyToOne(() => Vehicle, (vehicle) => vehicle.transfers)
     vehicle: Vehicle;
-    
+
     @Column()
     newOwnerId: number;
-    
+
     @Column()
     newOwnerType: string;
 
     @Column()
     newOwnerName: string;
 
-    @Column()
+    @Column({ nullable: true })
     previousOwnerId: number;
 
-    @Column()
+    @Column({ nullable: true })
     previousOwnerType: string;
 
-    @Column()
+    @Column({ nullable: true })
     previousOwnerName: string;
 
     @Column()

@@ -12,7 +12,7 @@ export class TransferService {
             vehicle: { id: vehicleId },
             newOwnerId: newOwnerDetails.newOwnerId,
             newOwnerType: newOwnerDetails.newOwnerType,
-            newOwnerName: newOwnerDetails.newOwnerType,
+            newOwnerName: newOwnerDetails.newOwnerName,
             previousOwnerId: previousOwnerData.previousOwnerId,
             previousOwnerType: previousOwnerData.previousOwnerType,
             previousOwnerName: previousOwnerData.previousOwnerName
