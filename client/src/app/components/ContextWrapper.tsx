@@ -6,7 +6,7 @@ import React, { createContext, useEffect, useState } from 'react'
 const DataContext = createContext(null)
 
 const ContextWrapper = ({ children }) => {
-    const [context, setContext] = useState({ vehicles: [], owners: [], transfers: [] })
+    const [context, setContext] = useState({ vehicles: [], drivers: [], transfers: [] })
 
     const getTransfers = async () => {
         try {
@@ -23,7 +23,7 @@ const ContextWrapper = ({ children }) => {
         }
     }
 
-    const getOwners = async () => {
+    const getDrivers = async () => {
         try {
             let response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/drivers`, {
                 method: 'GET',
@@ -31,10 +31,10 @@ const ContextWrapper = ({ children }) => {
                     'Content-Type': 'application/json',
                 },
             });
-            const updatedOwners = await response.json();
-            setContext((prevContext) => ({ ...prevContext, owners: updatedOwners }))
+            const drivers = await response.json();
+            setContext((prevContext) => ({ ...prevContext, drivers: drivers }))
         } catch (err) {
-            console.log("Error while fetching owners")
+            console.log("Error while fetching drivers")
         }
     }
 
@@ -55,7 +55,7 @@ const ContextWrapper = ({ children }) => {
 
     useEffect(() => {
         getTransfers();
-        getOwners();
+        getDrivers();
         getVehicles();
     }, []);
 

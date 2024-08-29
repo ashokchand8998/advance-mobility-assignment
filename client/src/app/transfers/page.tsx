@@ -9,6 +9,7 @@ const page = () => {
     const [selectedVehicle, setSelectedVehicle] = useState(null)
     const [selectedOwner, setSelectedOwner] = useState(null)
     const [loading, setLoading] = useState(false);
+    const [ownerType, setOwnerType] = useState('drivers');
 
     const getTransfers = async () => {
         try {
@@ -78,7 +79,7 @@ const page = () => {
 
     const findAndUpdateSelectedOwner = (event) => {
         const selectedValue = event.target.value;
-        const selectedObject = context?.owners.find(owner => owner.id == selectedValue);
+        const selectedObject = context[ownerType]?.find((owner: any) => (owner.id == selectedValue));
         console.log("type", selectedObject)
         setSelectedOwner(selectedObject ? selectedObject : null);
     }
@@ -86,6 +87,11 @@ const page = () => {
 
     return (
         <div className='page-container'>
+            <header>
+                <h3>Transfers</h3>
+                <span>Search</span>
+            </header>
+
             <form onSubmit={initiateTransfer}>
                 <label>
                     Select New Vehicle:
@@ -101,7 +107,22 @@ const page = () => {
                             >
                                 {vehicle.vehicleNumber}
                             </option>))}
-                    </select>                </label>
+                    </select>
+                </label>
+                <label>
+                    Owner Type
+                    <select name='type' required
+                        value={ownerType}
+                        onChange={(e) => setOwnerType(e.target.value)}>
+                        <option value={''} disabled>Select Owner Type</option>
+                        <option value='drivers'>
+                            Driver
+                        </option>
+                        <option value='orgs'>
+                            Organization
+                        </option>
+                    </select>
+                </label>
                 <label>
                     Select Owner:
                     <select name='owner' required
@@ -109,7 +130,7 @@ const page = () => {
                         value={selectedOwner?.id || ''}
                         onChange={(e) => findAndUpdateSelectedOwner(e)}>
                         <option value={''} disabled>Select Owner</option>
-                        {context.owners && context.owners.map((owner) => (
+                        {context[ownerType] && context[ownerType].map((owner) => (
                             <option
                                 key={owner.id}
                                 value={owner.id}
@@ -120,20 +141,17 @@ const page = () => {
                     </select>
                 </label>
 
-                <input type="submit" value="Submit" />
+                <button type="submit" value="Submit">Transfer</button>
             </form>
 
-            <header>
-                <h3>Transfers</h3>
-                <span>Search</span>
-            </header>
             <section>
-                <p>
-                    <label>Total Transfers: {transfers.length}</label>
-
+                <p className='count'>
+                    <label>Total Transfers: <span>
+                        {transfers.length}</span>
+                    </label>
                 </p>
                 <div className='table-head'>
-                    <span>Vehicle Number</span>
+                    <span className='lg'>Vehicle Number</span>
                     <span>To</span>
                     <span>From</span>
                     <span>Date</span>
@@ -141,10 +159,10 @@ const page = () => {
                 <div className='table-body'>
                     {transfers?.length > 0 && transfers.map((transfer) => (
                         <div className='table-row' key={transfer.id}>
-                            <span>{transfer.vehicle.vehicleNumber}</span>
+                            <span className='lg'>{transfer.vehicle.vehicleNumber}</span>
                             <span>{transfer.newOwnerName}</span>
                             <span>{transfer.previousOwnerName}</span>
-                            <span>{transfer.date}</span>
+                            <span>{(new Date(transfer.date)).toLocaleDateString()}</span>
                         </div>
                     ))}
                 </div>
