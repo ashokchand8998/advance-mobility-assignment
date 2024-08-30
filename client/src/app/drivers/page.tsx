@@ -84,7 +84,7 @@ const page = () => {
                 </label>
                 <label>
                     Phone Number
-                    <input type='tel' pattern="[0-9]{10}" value={newDriverPhone} onChange={(event) => setNewDriverContact(event.target.value)} name='name' placeholder='Enter phone number' required />
+                    <input type='tel' pattern="^[1-9][0-9]{9}$" value={newDriverPhone} onChange={(event) => setNewDriverContact(event.target.value)} name='name' placeholder='Enter phone number' required />
                 </label>
                 <label>
                     Select profile pic
